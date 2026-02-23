@@ -1,30 +1,31 @@
 resource "google_compute_network" "vpc" {
   name                    = "tf-vpc"
   auto_create_subnetworks = false
+
 }
 
 
 
 resource "google_compute_subnetwork" "web" {
-  name          = "web-subnet"
-  ip_cidr_range = "10.100.1.0/24"
-  region        = "asia-south1"
+  name          = var.web_subnet_name
+  ip_cidr_range = var.web_ip_cidr_range
+  region        = var.region
   network       = google_compute_network.vpc.id
   depends_on    = [google_compute_network.vpc]
 }
 
 resource "google_compute_subnetwork" "app" {
-  name          = "app-subnet"
-  ip_cidr_range = "10.100.2.0/24"
-  region        = "asia-south1"
+  name          = var.app_subnet_name
+  ip_cidr_range = var.app_ip_cidr_range
+  region        = var.region
   network       = google_compute_network.vpc.id
   depends_on    = [google_compute_network.vpc]
 }
 
 resource "google_compute_subnetwork" "db" {
-  name          = "db-subnet"
-  ip_cidr_range = "10.100.3.0/24"
-  region        = "asia-south1"
+  name          = var.db_subnet_name
+  ip_cidr_range = var.db_ip_cidr_range
+  region        = var.region
   network       = google_compute_network.vpc.id
   depends_on    = [google_compute_network.vpc]
 }
