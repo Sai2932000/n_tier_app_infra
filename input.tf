@@ -5,34 +5,15 @@ variable "region" {
 
 }
 
-variable "app_ip_cidr_range" {
-  type    = string
-  default = "10.100.2.0/24"
+variable "subnet_range" {
+  type    = list(string)
+  default = ["192.168.0.0/24", "192.168.1.0/24", "192.168.2.0/24"]
 }
 
-variable "web_ip_cidr_range" {
-  type    = string
-  default = "10.100.1.0/24"
-}
-variable "db_ip_cidr_range" {
-  type    = string
-  default = "10.100.3.0/24"
+variable "names" {
+  type    = list(string)
+  default = ["web", "app", "db"]
 }
 
-variable "app_subnet_name" {
-  type    = string
-  default = "app1"
 
-}
-
-variable "web_subnet_name" {
-  type    = string
-  default = "web1"
-
-}
-
-variable "db_subnet_name" {
-  type    = string
-  default = "db1"
-
-}
+  
