@@ -1,166 +1,121 @@
-🏗️ N-Tier Application Infrastructure
+# 🚀 GCP N-Tier Infrastructure using Terraform
 
-🔗 Repository:
+This project demonstrates the design and deployment of a scalable N-tier architecture on Google Cloud Platform using Terraform. It includes networking, compute, and load balancing components following cloud best practices.
 
-https://github.com/Sai2932000/n_tier_app_infra
+---
 
-This project demonstrates the implementation of a secure and scalable N-Tier infrastructure architecture using Infrastructure-as-Code principles. The goal is to design and provision cloud infrastructure that separates application components into multiple tiers for security, scalability, and maintainability.
+## 📌 Architecture Overview
 
-The architecture follows the standard three-tier model:
+User → Load Balancer → Managed Instance Group → VM Instances → Subnet → VPC
 
-Web Tier – Handles incoming user traffic
+- **VPC**: Custom isolated network
+- **Subnet**: Web layer hosting application instances
+- **Managed Instance Group (MIG)**: Automatically manages VM instances
+- **Load Balancer**: Distributes incoming traffic
+- **Startup Script**: Installs and configures Nginx dynamically
 
-Application Tier – Processes business logic
+---
 
-Database Tier – Stores persistent application data
+## 🛠️ Technologies Used
 
-This design pattern is widely used in production cloud environments.
+- Google Cloud Platform (GCP)
+- Terraform
+- Compute Engine
+- Managed Instance Groups (MIG)
+- HTTP Load Balancer
+- Ubuntu 22.04
+- Nginx
 
-🚀 Project Objectives
+---
 
-Implement a production-style N-Tier architecture
+## 🧱 Infrastructure Components
 
-Use Infrastructure as Code to automate infrastructure provisioning
+### 🔹 Networking
+- Custom VPC
+- Web Subnet
+- Firewall rules for HTTP (80) and SSH (22)
 
-Separate application components into isolated network tiers
+### 🔹 Compute
+- Instance Template
+- Managed Instance Group (MIG)
 
-Improve security through network segmentation
+### 🔹 Load Balancing
+- Global HTTP Load Balancer
+- Backend Service
+- Health Check
+- URL Map & Target Proxy
 
-Enable scalable application deployment
+---
 
-🧑‍💻 DevOps Implementation
+## ⚙️ How It Works
 
-🌐 Network Infrastructure
+1. Terraform provisions VPC and subnet
+2. Instance Template defines VM configuration
+3. MIG creates and manages VM instances
+4. Startup script installs Nginx on each VM
+5. Load Balancer routes traffic to healthy instances
 
-The infrastructure is designed with proper network segmentation to ensure secure communication between tiers.
+---
 
-Key components include:
+## 🚀 Deployment Steps
 
-Virtual Private Cloud (VPC)
 
-Public Subnets for Web Tier
+terraform init
 
-Private Subnets for Application Tier
+terraform plan
 
-Isolated Subnets for Database Tier
+terraform apply
 
-Internet Gateway for external connectivity
+🌐 Access the Application
 
-Route Tables to control traffic flow
+After deployment:
 
-⚙️ Infrastructure as Code
+Access via Load Balancer IP:
 
-Infrastructure resources are defined using Infrastructure-as-Code (IaC) practices, allowing automated and repeatable deployments.
+http://<LOAD_BALANCER_IP>
 
-Benefits:
+Or directly via VM:
 
-Version-controlled infrastructure
+http://<VM_EXTERNAL_IP>
 
-Consistent environment provisioning
+🧪 Validation
 
-Faster infrastructure deployment
+Check backend health:
 
-Reduced manual configuration errors
+gcloud compute backend-services get-health web-backend --global
 
-🔐 Security Configuration
+SSH into VM:
 
-Security best practices are implemented using controlled network access.
+gcloud compute ssh <instance-name> --zone=asia-south1-a
 
-Security mechanisms include:
+🔐 Key Learnings
 
-Security Groups for instance-level access control
+Designing multi-tier architecture in GCP
 
-Private subnet isolation for backend services
+Using Terraform for Infrastructure as Code
 
-Controlled communication between tiers
+Configuring Load Balancers and health checks
 
-Example security model:
+Debugging unhealthy backends
 
-Internet
-   │
-   ▼
-Load Balancer / Web Tier
-   │
-   ▼
-Application Tier (Private Subnet)
-   │
-   ▼
-Database Tier (Restricted Access)
+Working with Managed Instance Groups
 
-🏗️ Architecture Diagram
+📈 Future Improvements
 
-Users
-  │
-  ▼
-Internet Gateway
-  │
-  ▼
-Public Subnet
-(Web Tier / Load Balancer)
-  │
-  ▼
-Private Subnet
-(Application Tier)
-  │
-  ▼
-Database Subnet
-(Database Tier)
+Add HTTPS with SSL certificates
 
-This architecture ensures:
+Enable autoscaling policies
 
-Secure network segmentation
+Use private subnets with Cloud NAT
 
-Controlled access between layers
+Integrate Cloud SQL (DB layer)
 
-High scalability
+Implement CI/CD pipeline
 
-📂 Repository Structure
+👨‍💻 Author
 
-n_tier_app_infra
-│
-├── infrastructure/
-│   ├── network
-│   ├── compute
-│   └── database
-│
-├── scripts/
-│
-└── README.md
+Sai Kumar Thumma
 
-(Structure may vary depending on infrastructure modules.)
+LinkedIn: www.linkedin.com/in/saikumarthumma
 
-🛠️ Tools & Technologies
-
-Tool	Purpose
-
-Infrastructure as Code	Automated provisioning
-
-Cloud Networking	Secure tiered architecture
-
-Linux	Infrastructure management
-
-GitHub	Version control
-
-DevOps Practices	Infrastructure automation
-
-📚 Key Concepts Demonstrated
-
-✔ N-Tier cloud architecture
-✔ Infrastructure as Code practices
-✔ Secure network segmentation
-✔ Cloud infrastructure automation
-✔ DevOps infrastructure management
-
-🔮 Future Improvements
-
-Possible enhancements for this infrastructure:
-
-Add Load Balancer
-
-Implement Auto Scaling
-
-Integrate CI/CD deployment
-
-Add Monitoring and Logging
-
-Implement Terraform modules for reuse
+GitHub: https://github.com/Sai2932000
