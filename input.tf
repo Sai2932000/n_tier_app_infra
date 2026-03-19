@@ -1,19 +1,27 @@
-
 variable "region" {
-  type    = string
+  type = string
   default = "asia-south1"
-
-}
-
-variable "subnet_range" {
-  type    = list(string)
-  default = ["192.168.0.0/24", "192.168.1.0/24", "192.168.2.0/24"]
-}
-
-variable "names" {
-  type    = list(string)
-  default = ["web", "app", "db"]
 }
 
 
+variable "web_subnet" {
+  type = string
+  default = "10.0.1.0/24"
   
+}
+
+variable "web_subnet_name" {
+  
+  type = string
+  default = "web-subnet"
+  
+}
+
+
+
+variable "vpc_name" {
+  
+  type = string
+  default = "prod-vpc"
+  
+}
